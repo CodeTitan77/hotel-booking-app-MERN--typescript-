@@ -12,7 +12,7 @@ const Toast = ({message,type,onClose}:ToastProps)=>{
   },5000);
    
   return ()=>{
-    clearTimeout(timer);
+    clearTimeout(timer);//resets the timer when the component is closed
   };
    },[onClose]);
     const styles = type === "SUCCESS" ?"fixed top-4 right-4 z-50 p-4 rounded-md bg-green-600 text-white max-w-md"
