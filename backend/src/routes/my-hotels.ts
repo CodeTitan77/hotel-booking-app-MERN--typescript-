@@ -63,5 +63,18 @@ upload.array("imageFiles",6),async(req:Request,res:Response)=>{
     }
 
 
-})
+});
+
+router.get("/",verifyToken,async(req:Request,res:Response)=>{
+    const hotels = await Hotel.find({userId: req.userId}); // userID stored in Http Token
+   
+    try{
+        res.json(hotels);
+    }
+    catch(error){
+        res.status(500).json({message:"Error fetching details"})
+
+    };
+
+});
 export default router;
