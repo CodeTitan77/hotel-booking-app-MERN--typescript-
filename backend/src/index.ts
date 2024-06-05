@@ -26,10 +26,14 @@ app.use(cors(
     }
 )) ;
  // preventing request from urls
- app.use(express.static(path.join(__dirname, "../../Frontend/dist")));
+ app.use(express.static(path.join(__dirname, "../../Frontend/dist")));//for bundling the backend code with frontend 
  app.use("/api/auth",authRoutes);
  app.use("/api/users",userRoutes);
  app.use("/api/my-hotels",myHotelRoutes);
+ 
+ app.get("*",(req:Request,res:Response)=>{
+    res.sendFile(path.join(__dirname,"../../Frontend/dist/index.html"));
+ }) // for protected routes
 
  app.listen(7000,()=>{
     console.log("server started on port number 7000");
