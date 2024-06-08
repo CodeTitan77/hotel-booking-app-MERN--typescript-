@@ -21,7 +21,7 @@ export type UserType = {
     starRating: number;
     imageUrls: string[];
     lastUpdated: Date;
-    bookings: BookingType[];
+    // bookings: BookingType[];
   };
   
   export type BookingType = {
@@ -46,8 +46,8 @@ export type UserType = {
     };
   };
   
-  export type PaymentIntentResponse = {
-    paymentIntentId: string;
-    clientSecret: string;
-    totalCost: number;
-  };
+  // export type PaymentIntentResponse = {
+  //   paymentIntentId: string;
+  //   clientSecret: string;
+  //   totalCost: number;
+  // };
