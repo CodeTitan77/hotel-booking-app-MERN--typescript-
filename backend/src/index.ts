@@ -14,7 +14,12 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(()=>{
+    console.log("Database connected  ");
+
+}
+
+);
 
 const app = express();
 app.use(cookieParser());
