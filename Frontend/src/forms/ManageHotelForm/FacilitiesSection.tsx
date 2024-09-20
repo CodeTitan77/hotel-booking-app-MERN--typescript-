@@ -13,7 +13,8 @@ const FacilitiesSection = () => {
                <input type="checkbox" value={facility} {...register("facilities",{
                 validate:(facilities)=>{
                     if(facilities && facilities.length>0){
-                        return true
+                         // fixed the facilities array bug 
+                       
                     }
                     else{
                         return "At least one facility is required"
@@ -32,5 +33,9 @@ const FacilitiesSection = () => {
     </div>
   )
 };
+ export default FacilitiesSection
 
-export default FacilitiesSection;
+
+
+
+
