@@ -66,7 +66,7 @@ const ManageHotelForm = ({onSave,isLoading,hotel}:Props) => {
         formData.append(`imageFiles`,imageFile);
 
 
-      });
+      });//used Array.from to convert it into actual js array neccessary for imagefiles
 
        onSave(formData);
 
@@ -97,3 +97,10 @@ const ManageHotelForm = ({onSave,isLoading,hotel}:Props) => {
 }
 
 export default ManageHotelForm;
+
+
+
+
+
+
+
