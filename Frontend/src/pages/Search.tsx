@@ -8,6 +8,7 @@ import StarRatingFilter from './../components/StarRatingFilter';
 
 const Search = () => {
     const search = useSearchContext();
+    // console.log(search);
     const [page,setPage]= useState<number>(1);
     const [selectedStars,setSelectedStars]= useState<string[]>([]);
     const searchParams = {
