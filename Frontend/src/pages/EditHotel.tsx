@@ -35,3 +35,5 @@ const handleSave = (hotelFormData:FormData)=>{
 };
 
 export default EditHotel;
+
+

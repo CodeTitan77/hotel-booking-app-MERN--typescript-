@@ -30,6 +30,9 @@ export const SearchContextProvider= ({children}:SearchContextProviderProps)=>{
         setCheckOut(checkOut);
         setAdultCount(adultCount);
         setChildCount(childCount);
+        if(hotelId){
+            setHotelId(hotelId);
+        }
 
 
     }
