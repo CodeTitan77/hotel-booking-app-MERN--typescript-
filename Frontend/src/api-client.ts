@@ -156,3 +156,7 @@ export const searchHotels = async(searchParams: SearchParams):Promise<HotelSearc
 
 
 }
+
+
+
+
