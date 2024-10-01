@@ -6,6 +6,8 @@ import SearchResultCard from './../components/SearchResultCard';
 import Pagination from "../components/Pagination";
 import StarRatingFilter from './../components/StarRatingFilter';
 import HotelTypesFilter from "../components/HotelTypesFilter";
+import FacilitiesFilter from "../components/FacilitiesFilter";
+import PriceFilter from './../components/PriceFilter';
 
 
 
@@ -15,6 +17,10 @@ const Search = () => {
     const [page,setPage]= useState<number>(1);
     const [selectedStars,setSelectedStars]= useState<string[]>([]);
     const [selectedHotelTypes,setSelectedHotelTypes]= useState<string[]>([]);
+    const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
+    const [selectedPrice,setSelectedPrice]=useState<number | undefined>();
+    const [sortOption,setSortOption]= useState<string>("");
+
     const searchParams = {
         destination : search.destination,
         checkIn: search.checkIn.toISOString(),
@@ -23,7 +29,11 @@ const Search = () => {
         childCount :  search.childCount.toString(),
         page: page.toString(),
         stars: selectedStars,
-        types: selectedHotelTypes
+        types: selectedHotelTypes,
+        facilities: selectedFacilities,
+        maxPrice:selectedPrice?.toString(),
+        sortOption,
+
 
     };
     const { data: hotelData } = useQuery(["searchHotels", searchParams], () =>
@@ -41,6 +51,15 @@ const Search = () => {
       event.target.checked ? [...prevHotelTypes,hotelType]:
       prevHotelTypes.filter((hotel)=>hotel!==hotelType));
     };
+    const handleFacilityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const facility = event.target.value;
+  
+      setSelectedFacilities((prevFacilities) =>
+        event.target.checked
+          ? [...prevFacilities, facility]
+          : prevFacilities.filter((prevFacility) => prevFacility !== facility)
+      );
+    };
   return (
    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
     <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
@@ -53,15 +72,32 @@ const Search = () => {
             onChange={handleStarsChange}
           />
           <HotelTypesFilter selectedHotelTypes={selectedHotelTypes} onChange={handleHotelTypeChange} />
+          <FacilitiesFilter 
+          selectedFacilities={selectedFacilities}
+           onChange={handleFacilityChange}/>
+           <PriceFilter selectedPrice={selectedPrice} onChange={(value?:number)=> setSelectedPrice(value)} />
       
       </div>
 
     </div>
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center">
-          <span className="text-xl font-bold">{hotelData?.pagination.total} Hotels Found
+          <span className="text-xl font-bold">{hotelData?.pagination?.total} Hotels Found
           {search.destination ? ` in ${search.destination}`:"" }</span>
-          {/* {sort options} */}
+          <select
+            value={sortOption}
+            onChange={(event) => setSortOption(event.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">Sort By</option>
+            <option value="starRating">Star Rating</option>
+            <option value="pricePerNightAsc">
+              Price Per Night (low to high)
+            </option>
+            <option value="pricePerNightDesc">
+              Price Per Night (high to low)
+            </option>
+            </select>
           
         </div>
         {hotelData?.data.map((hotel) => (

@@ -112,17 +112,16 @@ export const updateMyHotelById = async(hotelFormData: FormData)=>{
 };
 
 export type SearchParams= {
-  destination?:string;
-  checkIn?:string;
-  checkOut?:string;
-  adultCount?:string;
-  childCount?:string;
-  page?:string;
-  maxPrice?: string;
+  destination?: string;
+  checkIn?: string;
+  checkOut?: string;
+  adultCount?: string;
+  childCount?: string;
+  page?: string;
   facilities?: string[];
   types?: string[];
   stars?: string[];
- 
+  maxPrice?: string;
   sortOption?: string;
  
 };
@@ -155,8 +154,18 @@ export const searchHotels = async(searchParams: SearchParams):Promise<HotelSearc
 
 
 
-}
+};
+  
 
+export const fetchHotelById = async(hotelId:string)=>{
+  const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`)
+  if(!response.ok){
+    throw new Error ("Error fetching Hotels");
+  }
+  return response.json();
+
+
+}
 
 
 
