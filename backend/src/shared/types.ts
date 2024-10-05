@@ -23,6 +23,7 @@ export type UserType = {
     lastUpdated: Date;
     // bookings: BookingType[];
   };
+
   
   export type BookingType = {
     _id: string;
