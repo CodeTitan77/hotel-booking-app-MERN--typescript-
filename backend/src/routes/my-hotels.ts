@@ -15,7 +15,10 @@ const upload = multer({
         fileSize: 5 *1024*1024
     }
 })
+// router.get("/me",verifyToken,async(req:Request,res:Response)=>{
+//     const userId= req.userId;
 
+// });
 
 router.post("/",
 verifyToken, [
